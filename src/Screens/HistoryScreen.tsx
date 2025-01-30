@@ -13,14 +13,9 @@ const HistoryScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
       return state.sortOrder === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
     });
   };
-
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-        <Text style={styles.backButtonText}>⬅ Back</Text>
-      </TouchableOpacity>
-
-      <Text style={styles.title}>Completed Timers</Text>
+     
 
       <View style={styles.sortHeader}>
         <TouchableOpacity onPress={() => dispatch({ type: 'SET_SORT', payload: { sortBy: 'name', sortOrder: state.sortOrder === 'asc' ? 'desc' : 'asc' } })}>
@@ -54,21 +49,17 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 10,
-  },
   historyItem: {
     backgroundColor: '#f9f9f9',
     padding: 10,
     marginBottom: 10,
     borderRadius: 5,
-  },
-  backButton: {
-    marginBottom: 10,
-    padding: 10,
+  elevation: 2,
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.1,
+  shadowRadius: 5,
+  justifyContent: 'space-between',
   },
   backButtonText: {
     fontSize: 16,

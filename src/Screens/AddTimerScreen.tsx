@@ -43,17 +43,12 @@ const AddTimerScreen = ({ navigation }: { navigation: AddTimerScreenNavigationPr
 
     dispatch({ type: 'ADD_TIMER', payload: newTimer });
 
-    // ✅ Move directly to Home Screen after adding
     navigation.navigate('Home');
   };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-        <Text style={styles.backButtonText}>⬅ Back</Text>
-      </TouchableOpacity>
-
-      <Text style={styles.title}>Create New Timer</Text>
+     
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
       <TextInput style={styles.input} placeholder="Timer Name" value={name} onChangeText={setName} />
@@ -69,11 +64,9 @@ const AddTimerScreen = ({ navigation }: { navigation: AddTimerScreenNavigationPr
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 20, backgroundColor: '#F8F9FA' },
-  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 20, textAlign: 'center' },
   input: { height: 50, borderWidth: 1, borderColor: '#ddd', padding: 10, borderRadius: 8, marginBottom: 15, backgroundColor: '#fff' },
   submitButton: { backgroundColor: '#2ECC71', padding: 15, borderRadius: 8, alignItems: 'center' },
   submitButtonText: { color: '#FFF', fontSize: 16, fontWeight: 'bold' },
-  backButton: { marginBottom: 10, padding: 10 },
   backButtonText: { fontSize: 16, color: '#007BFF' },
   errorText: { color: '#E74C3C', fontSize: 14, marginBottom: 15, textAlign: 'center' },
 });

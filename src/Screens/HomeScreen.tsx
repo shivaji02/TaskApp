@@ -36,7 +36,6 @@ const HomeScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
     <View style={styles.container}>
       <Text style={styles.title}>Task Timers</Text>
 
-      {/* 🔀 Sorting Header */}
       <View style={styles.sortHeader}>
         <TouchableOpacity onPress={() => dispatch({ type: 'SET_SORT', payload: { sortBy: 'name', sortOrder: state.sortOrder === 'asc' ? 'desc' : 'asc' } })}>
           <Text style={styles.sortText}>Name {state.sortBy === 'name' ? (state.sortOrder === 'asc' ? '▲' : '▼') : ''}</Text>
@@ -57,7 +56,7 @@ const HomeScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
           <View style={styles.timerCard}>
             <Text>{item.name} - {item.remaining} sec</Text>
             <TouchableOpacity onPress={() => dispatch({ type: 'COMPLETE_TIMER', payload: item.id })}>
-              <Text style={styles.completeButton}>✅ Mark Complete</Text>
+              <Text style={styles.completeButton}> Mark Complete</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -65,12 +64,12 @@ const HomeScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
 
       {/* ➕ Add Timer Button */}
       <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('AddTimer')}>
-        <Text style={styles.addButtonText}>➕ Add Timer</Text>
+        <Text style={styles.addButtonText}>Add Timer</Text>
       </TouchableOpacity>
 
       {/* 📜 View History Button */}
       <TouchableOpacity style={styles.historyButton} onPress={() => navigation.navigate('History')}>
-        <Text style={styles.historyButtonText}>📜 View History</Text>
+        <Text style={styles.historyButtonText}> View History</Text>
       </TouchableOpacity>
     </View>
   );

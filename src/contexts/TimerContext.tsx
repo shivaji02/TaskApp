@@ -1,15 +1,22 @@
 import React, { createContext, useReducer, useContext } from 'react';
-import { TimerContextType, TimerState,  TimerAction } from '../types/timerTypes';
+import { TimerContextType, TimerState, TimerAction } from '../types/timerTypes';
 
 const initialState: TimerState = {
-  timers: [],
+  timers: [{
+    id: '1',
+    name: ' Timer1',
+    duration: 60,
+    remaining: 60,
+    category: 'Work',
+    status: 'paused',
+    createdAt: new Date(),
+  }],
   history: [],
   sortBy: 'name',
   sortOrder: 'asc',
 };
 
-// Creating Context with proper types
-const TimerContext = createContext<TimerContextType | undefined>(undefined); // ✅ Fix: Prevent undefined issues
+const TimerContext = createContext<TimerContextType | undefined>(undefined);
 
 const timerReducer = (state: TimerState, action: TimerAction): TimerState => {
   switch (action.type) {
@@ -44,48 +51,21 @@ const timerReducer = (state: TimerState, action: TimerAction): TimerState => {
         sortOrder: action.payload.sortOrder,
       };
 
-    case 'HYDRATE_STATE':
-      return action.payload;
-
-    case 'BULK_UPDATE':
-      return {
-        ...state,
-        timers: state.timers.map((timer) =>
-          timer.category === action.payload.category
-            ? { ...timer, status: action.payload.status }
-            : timer
-        ),
-      };
-
-    case 'BULK_RESET':
-      return {
-        ...state,
-        timers: state.timers.map((timer) =>
-          timer.category === action.payload.category
-            ? { ...timer, remaining: timer.duration, status: 'paused' }
-            : timer
-        ),
-      };
-
-    case 'ADD_TO_HISTORY':
-      return { ...state, history: [action.payload, ...state.history] };
-
     default:
       return state;
   }
 };
 
-// TimerProvider Component
+
 export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(timerReducer, initialState);
   return <TimerContext.Provider value={{ state, dispatch }}>{children}</TimerContext.Provider>;
 };
 
-// Custom Hook for using Timer Context
 export const useTimer = () => {
   const context = useContext(TimerContext);
   if (!context) {
-    throw new Error('useTimer must be used within a TimerProvider');
+    throw new Error('something went wrong with TimerContext');
   }
   return context;
 };

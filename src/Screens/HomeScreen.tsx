@@ -7,13 +7,20 @@ const HomeScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const { state, dispatch } = useTimer();
   const [timers, setTimers] = useState(state.timers);
 
+  // ⏳ Update Timers Every Second
   useEffect(() => {
     const interval = setInterval(() => {
-      setTimers(state.timers.map((timer) =>
-        timer.remaining > 0 ? { ...timer, remaining: timer.remaining - 1 } : timer
-      ));
+      setTimers((prevTimers) =>
+        prevTimers.map((timer) =>
+          timer.remaining > 0 ? { ...timer, remaining: timer.remaining - 1 } : timer
+        )
+      );
     }, 1000);
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    setTimers(state.timers);
   }, [state.timers]);
 
   // 🏷️ Sorting Function
@@ -24,7 +31,7 @@ const HomeScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
       return state.sortOrder === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
     });
   };
-console.log('>>>>>>>>HomeScreen.tsx',state);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Task Timers</Text>
@@ -68,6 +75,7 @@ console.log('>>>>>>>>HomeScreen.tsx',state);
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {

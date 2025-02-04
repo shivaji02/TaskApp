@@ -71,6 +71,10 @@ const HomeScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
       <TouchableOpacity style={styles.historyButton} onPress={() => navigation.navigate('History')}>
         <Text style={styles.historyButtonText}> View History</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={styles.historyButton} onPress={() => navigation.navigate('Timer')}>
+        <Text style={styles.historyButtonText}> Go to timer</Text>
+      </TouchableOpacity>
+      
     </View>
   );
 };

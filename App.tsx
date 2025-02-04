@@ -5,7 +5,8 @@ import HomeScreen from './src/Screens/HomeScreen';
 import AddTimerScreen from './src/Screens/AddTimerScreen';
 import HistoryScreen from './src/Screens/HistoryScreen';
 import { TimerProvider } from './src/contexts/TimerContext';
-
+import { StatusBar } from 'react-native';
+import TimerScreen from './src/Screens/TimerScreen';
 const Stack = createStackNavigator();
 
 function App() {
@@ -33,6 +34,11 @@ function App() {
             name="History"
             component={HistoryScreen}
             options={{ title: 'Completed Timers' }}
+          />
+          <Stack.Screen
+            name="Timer"
+            component={TimerScreen}
+            options={{ title: 'Timer' }}
           />
         </Stack.Navigator>
       </NavigationContainer>

@@ -3,7 +3,7 @@ import { FlatList, Text, View, TouchableOpacity, StyleSheet } from 'react-native
 import { useTimer } from '../contexts/TimerContext';
 import { NavigationProp } from '@react-navigation/native';
 
-const HistoryScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
+const HistoryScreen = ({ }: { navigation: NavigationProp<any> }) => {
   const { state, dispatch } = useTimer();
 
   const getSortedHistory = () => {
@@ -15,7 +15,6 @@ const HistoryScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
   };
   return (
     <View style={styles.container}>
-     
 
       <View style={styles.sortHeader}>
         <TouchableOpacity onPress={() => dispatch({ type: 'SET_SORT', payload: { sortBy: 'name', sortOrder: state.sortOrder === 'asc' ? 'desc' : 'asc' } })}>

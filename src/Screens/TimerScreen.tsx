@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, Button, Vibration } from 'react-native';
 import { FlatList, Switch } from 'react-native-gesture-handler';
 import ProgressBar from '../components/ProgressBar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import TimerItem from '../components/TimerItem';
 
 const TimerScreen = () => {
     interface Timer {
@@ -58,6 +57,7 @@ const resetTimer = (id: number) => {
 
 const deleteTimer = (id: number) => {
     setTimers(timers.filter(timer => timer.id !== id));
+    AsyncStorage.removeItem('timers');
 };
 
 const saveTimers = async (timers: Timer[]) => {
@@ -82,11 +82,12 @@ const loadTimers = async () => {
             renderItem={({item}) => (
                 <View style={styles.timer}>
                     <Text style={darkMode ? styles.darkText : styles.lightText}>{item.timeLeft}</Text>
-                    <ProgressBar progress={item.timeLeft/TimerItem.duration} color={darkMode ? 'white' : 'black'}/>
+                    <ProgressBar progress={item.timeLeft/item.duration}  color="red"/>
                     <Text style={darkMode ? styles.darkText : styles.lightText}>{item.duration}</Text>
                     <View style={styles.buttonRow}>
 
                     <Button title={item.isRunning ? 'Pause' : 'Start'} onPress={()=>toggleTimer(item.id)}/>
+                    <Button title="Reset" onPress={()=>resetTimer(item.id)}/>
                     <Button title="Delete" onPress={()=>deleteTimer(item.id)}/>
                     </View>
                 </View>

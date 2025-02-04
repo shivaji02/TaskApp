@@ -5,7 +5,6 @@ import HomeScreen from './src/Screens/HomeScreen';
 import AddTimerScreen from './src/Screens/AddTimerScreen';
 import HistoryScreen from './src/Screens/HistoryScreen';
 import { TimerProvider } from './src/contexts/TimerContext';
-import { StatusBar } from 'react-native';
 import TimerScreen from './src/Screens/TimerScreen';
 const Stack = createStackNavigator();
 
